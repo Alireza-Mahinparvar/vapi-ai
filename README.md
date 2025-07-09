@@ -117,7 +117,6 @@ flask
 soundfile
 numpy
 gtts
-openai
 SpeechRecognition
 sounddevice
 playsound
