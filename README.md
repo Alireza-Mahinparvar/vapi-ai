@@ -21,7 +21,7 @@ A simple, privacy-friendly voice AI assistant that listens to you, understands y
 
 ### 1. Clone the repository
 ```bash
-git clone <repo-url>
+git clone [<repo-url>](https://github.com/Alireza-Mahinparvar/vapi-ai)
 cd vapi.ai
 ```
 
