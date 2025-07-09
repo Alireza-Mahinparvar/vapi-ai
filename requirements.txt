@@ -1,0 +1,7 @@
+# Requirements for Mini Voice AI Assistant
+openai
+SpeechRecognition
+sounddevice
+numpy
+gtts
+playsound
