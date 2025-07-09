@@ -1,7 +1,10 @@
+
 # Requirements for Mini Voice AI Assistant
+flask
+soundfile
+numpy
+gtts
 openai
 SpeechRecognition
 sounddevice
-numpy
-gtts
 playsound

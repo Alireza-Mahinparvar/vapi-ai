@@ -36,12 +36,24 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+
 ### 4. Install Ollama (for local LLM)
+Ollama is required to run the local LLM (e.g., Llama 3). You need to run Ollama in a separate terminal window before starting the web or CLI app.
+
+**Step 1: Open a new terminal window and run Ollama server:**
 ```bash
 brew install ollama
 ollama serve
+```
+
+**Step 2: In the same terminal, pull the Llama 3 model:**
+```bash
 ollama pull llama3
 ```
+
+**You should always keep the Ollama server running in one terminal.**
+
+**In a second terminal, activate your Python environment and run the app as described below.**
 
 ### 5. (Optional) Install ffmpeg for web audio support
 ```bash
