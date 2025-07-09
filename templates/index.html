@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Voice AI Assistant</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f7f7f7; }
+        .container { max-width: 500px; margin: auto; background: #fff; padding: 2em; border-radius: 10px; box-shadow: 0 2px 8px #ccc; }
+        button { padding: 1em 2em; font-size: 1.2em; border: none; border-radius: 5px; background: #007bff; color: #fff; cursor: pointer; }
+        button:disabled { background: #aaa; }
+        audio { width: 100%; margin-top: 1em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mini Voice AI Assistant</h1>
+        <button id="recordBtn">🎤 Record</button>
+        <audio id="audioPlayer" controls style="display:none;"></audio>
+        <div id="status"></div>
+    </div>
+    <script>
+        const recordBtn = document.getElementById('recordBtn');
+        const audioPlayer = document.getElementById('audioPlayer');
+        const statusDiv = document.getElementById('status');
+        let mediaRecorder, audioChunks = [];
+
+        recordBtn.onclick = async () => {
+            if (mediaRecorder && mediaRecorder.state === 'recording') {
+                mediaRecorder.stop();
+                recordBtn.disabled = true;
+                recordBtn.textContent = 'Processing...';
+                return;
+            }
+            audioChunks = [];
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            mediaRecorder = new MediaRecorder(stream);
+            mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+            mediaRecorder.onstop = async () => {
+                const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                const formData = new FormData();
+                formData.append('audio', audioBlob, 'recording.webm');
+                statusDiv.textContent = 'Uploading and waiting for response...';
+                const response = await fetch('/process', { method: 'POST', body: formData });
+                if (response.ok) {
+                    const audioUrl = URL.createObjectURL(await response.blob());
+                    audioPlayer.src = audioUrl;
+                    audioPlayer.style.display = 'block';
+                    audioPlayer.play();
+                    statusDiv.textContent = '';
+                } else {
+                    statusDiv.textContent = 'Error: Could not process audio.';
+                }
+                recordBtn.disabled = false;
+                recordBtn.textContent = '🎤 Record';
+            };
+            mediaRecorder.start();
+            recordBtn.textContent = 'Stop';
+            statusDiv.textContent = 'Recording...';
+        };
+    </script>
+</body>
+</html>
