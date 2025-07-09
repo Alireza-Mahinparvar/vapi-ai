@@ -85,9 +85,10 @@ python app.py
 
 ## Usage
 
+
 **CLI:**
 - Follow the prompts to record your question and hear the AI’s spoken reply.
-- Say or type "goodbye" to end the conversation.
+- To terminate or exit the app, simply say or type "goodbye" when prompted. The assistant will recognize this and end the session gracefully.
 
 
 **Web:**
