@@ -8,33 +8,33 @@ import tempfile
 import subprocess
 import wave
 
-# Record audio from microphone
-def record_audio(duration=5, fs=16000):
-    print("🎙️ Speak now...")
-    audio = sd.rec(int(duration * fs), samplerate=fs, channels=1, dtype='int16')
+# Record voice from microphone
+def record_voice(duration=5, fs=16000):
+    print("Talk now...")
+    voice = sd.rec(int(duration * fs), samplerate=fs, channels=1, dtype='int16')
     sd.wait()
-    print("✅ Recording finished.")
-    return np.squeeze(audio)
+    print("✅ Recording done")
+    return np.squeeze(voice)
 
-# Save audio to WAV
-def save_wav(audio, fs, filename):
+# Save voice to WAV
+def save_wav(voice, fs, filename):
     with wave.open(filename, 'wb') as wf:
         wf.setnchannels(1)
         wf.setsampwidth(2)  # 2 bytes for int16
         wf.setframerate(fs)
-        wf.writeframes(audio.tobytes())
+        wf.writeframes(voice.tobytes())
 
-# Transcribe WAV audio to text using Google STT
+# Transcribe WAV voice to text using Google STT
 def transcribe_audio(filename):
     recognizer = sr.Recognizer()
     with sr.AudioFile(filename) as source:
-        audio = recognizer.record(source)
+        voice = recognizer.record(source)
     try:
-        text = recognizer.recognize_google(audio)
+        text = recognizer.recognize_google(voice)
         print(f"🗣️ You said: {text}")
         return text
     except Exception as e:
-        print("❌ Could not transcribe audio:", e)
+        print("❌ Could not transcribe voice:", e)
         return None
 
 # Ask local Ollama LLM (e.g., llama3)
@@ -79,7 +79,7 @@ def speak_text(text):
     tts = gTTS(text=text, lang='en')
     with tempfile.NamedTemporaryFile(delete=False, suffix='.mp3') as fp:
         tts.save(fp.name)
-        subprocess.run(['afplay', fp.name])  # macOS audio player
+        subprocess.run(['afplay', fp.name])  # macOS voice player
     os.remove(fp.name)
 
 # Main loop
@@ -89,9 +89,9 @@ def main():
 
     print("Type 'goodbye' or say 'goodbye' to end the conversation.")
     while True:
-        audio = record_audio(duration, fs)
+        voice = record_voice(duration, fs)
         with tempfile.NamedTemporaryFile(delete=False, suffix='.wav') as fp:
-            save_wav(audio, fs, fp.name)
+            save_wav(voice, fs, fp.name)
             text = transcribe_audio(fp.name)
         os.remove(fp.name)
 
