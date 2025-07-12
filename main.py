@@ -13,7 +13,7 @@ def record_voice(duration=5, fs=16000):
     print("Talk now...")
     voice = sd.rec(int(duration * fs), samplerate=fs, channels=1, dtype='int16')
     sd.wait()
-    print("✅ Recording done")
+    print("Recording done")
     return np.squeeze(voice)
 
 # Save voice to WAV
@@ -31,15 +31,15 @@ def transcribe_audio(filename):
         voice = recognizer.record(source)
     try:
         text = recognizer.recognize_google(voice)
-        print(f"🗣️ You said: {text}")
+        print(f"You said: {text}")
         return text
     except Exception as e:
-        print("❌ Could not transcribe voice:", e)
+        print(" Could not transcribe voice:", e)
         return None
 
 # Ask local Ollama LLM (e.g., llama3)
 def ask_llm(prompt, model="llama3"):
-    print("🤖 Thinking...")
+    print("waiting ...")
     url = "http://localhost:11434/api/chat"
     payload = {
         "model": model,
@@ -68,10 +68,10 @@ def ask_llm(prompt, model="llama3"):
                         continue
             else:
                 answer = "Sorry, I couldn't parse the response from the local AI."
-        print(f"🤖 AI: {answer}")
+        print(f"AI: {answer}")
         return answer
     except Exception as e:
-        print("❌ Ollama API error:", e)
+        print("Ollama API error:", e)
         return "Sorry, I couldn't get a response from the local AI."
 
 # Speak text using gTTS + afplay (macOS)
@@ -99,7 +99,7 @@ def main():
             continue
 
         if 'goodbye' in text.lower():
-            print("👋 Conversation ended.")
+            print(" Conversation closed.")
             speak_text("Goodbye!")
             break
 
