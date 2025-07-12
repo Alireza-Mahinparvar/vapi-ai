@@ -10,13 +10,13 @@ A simple, privacy-friendly voice AI assistant that listens to you, understands y
 
 
 ## Features
-- 🎤 Record audio from your microphone (CLI or web)
-- 📝 Transcribe speech to text (Google STT)
-- 🤖 Get smart answers from a local LLM (Ollama, e.g., Llama 3)
-- 🔊 Convert the response to speech (gTTS)
-- ▶️ Play the audio reply
-- 🌐 Simple web UI with Record button and playback controls
-- 💻 CLI interface for terminal lovers
+- Record audio from your microphone (CLI or web)
+- Transcribe speech to text (Google STT)
+- Get smart answers from a local LLM (Ollama, e.g., Llama 3)
+- Convert the response to speech (gTTS)
+- Play the audio reply
+- Simple web UI with Record button and playback controls
+- CLI interface for terminal lovers
 
 ---
 
@@ -99,7 +99,7 @@ python app.py
 
 ## Demo
 Add a GIF, video, or audio clip of the bot in action here!
-
+https://drive.google.com/file/d/1_dwBaeA5AqIro4-sVG0kM6HNZgM1fDCd/view?usp=sharing
 ---
 
 
