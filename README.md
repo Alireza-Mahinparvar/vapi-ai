@@ -100,6 +100,12 @@ python app.py
 ## Demo
 Add a GIF, video, or audio clip of the bot in action here!
 https://drive.google.com/file/d/1_dwBaeA5AqIro4-sVG0kM6HNZgM1fDCd/view?usp=sharing
+
+
+https://github.com/user-attachments/assets/c569b1cb-dc02-4d0b-8cfc-5db3a83d565a
+
+
+
 ---
 
 
